@@ -161,3 +161,23 @@ data_marj =
   ) %>% 
   filter(!(State %in% c("Total U.S.", "Northeast", "Midwest", "South", "West")))
 ```
+
+## NSDUH – factors
+
+``` r
+data_marj |>
+  filter(age == "12-17") |> 
+  mutate(State = fct_reorder(State, percent)) |> 
+  ggplot(aes(x = State, y = percent, color = year)) + 
+    geom_point() + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+    ## Warning: There were 51 warnings in `mutate()`.
+    ## The first warning was:
+    ## ℹ In argument: `State = fct_reorder(State, percent)`.
+    ## Caused by warning in `mean.default()`:
+    ## ! argument is not numeric or logical: returning NA
+    ## ℹ Run `dplyr::last_dplyr_warnings()` to see the 50 remaining warnings.
+
+<img src="strings_and_factors_files/figure-gfm/unnamed-chunk-11-1.png" width="90%" />
