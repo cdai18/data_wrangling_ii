@@ -55,6 +55,43 @@ table_marj =
     as_tibble()
 ```
 
+## Star Wars Movie info
+
+I want the data from imdb
+
+```{r}
+url = "https://www.imdb.com/list/ls070150896/"
+
+swm_html = read_html(url)
+```
+
+Grab elements that I want
+
+```{r}
+title_vec = 
+  swm_html |>
+  html_elements(".lister-item-header a") |>
+  html_text()
+
+gross_rev_vec = 
+  swm_html |>
+  html_elements(".text-small:nth-child(7) span:nth-child(5)") |>
+  html_text()
+
+runtime_vec = 
+  swm_html |>
+  html_elements(".runtime") |>
+  html_text()
+
+swm_df = 
+  tibble(
+    title = title_vec,
+    rev = gross_rev_vec,
+    runtime = runtime_vec)
+```
+
+
+
 
 
 
